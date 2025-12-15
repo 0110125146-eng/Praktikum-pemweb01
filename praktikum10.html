@@ -1,0 +1,296 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Advanced & jQuery Tugas</title>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        
+        section {
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+
+        
+        #biodata {
+            text-align: center;
+            max-width: 300px;
+            margin: 10px auto;
+        }
+        #foto {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #3498db;
+        }
+
+        
+        #inputTugas {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #daftarTugas {
+            list-style-type: square;
+            max-width: 400px;
+            margin: 10px auto;
+        }
+        #daftarTugas li {
+            padding: 5px;
+            margin: 3px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        
+        .faq-pertanyaan {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .faq-jawaban {
+            padding: 10px;
+            margin: 0 0 10px;
+            border-left: 3px solid #3498db;
+            display: none;
+        }
+        .biru {
+            background: #cce5ff;
+        }
+
+        
+        #slideshow {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            margin: 10px auto;
+            border: 3px solid #3498db;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        #slideshow img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        #slideshow img:first-child {
+            display: block;
+        }
+
+        /* Tugas 5 Styling */
+        #notifikasi {
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 5px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .warnanya {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #2c3e50;">Tugas JavaScript Advanced & jQuery</h1>
+
+    
+    <section>
+        <h2>Tugas 1: Biodata Dinamis</h2>
+        <div id="biodata">
+            <h3>Biodata Mahasiswa</h3>
+            <img id="foto" src="fotosilvi.jpg" alt="Profil">
+            <p>Nama: <span id="nama">SILVI RAMADANI TANJUNG(Silvi)</span></p>
+            <p>NIM: <span id="nim">0110125146</span></p>
+            <p>Program Studi: <span id="prodi">Sistem Informasi</span></p>
+        </div>
+        <div style="text-align: center;">
+            <button onclick="ubahNama()">Ubah Nama</button>
+            <button onclick="ubahProdi()">Ubah Program Studi</button>
+            <button onclick="gantiFoto()">Ganti Foto</button>
+            <button onclick="sembunyikanBiodata()">Sembunyikan Biodata</button>
+            <button onclick="tampilkanBiodata()">Tampilkan Biodata</button>
+        </div>
+    </section>
+
+    
+    <section>
+        <h2>Tugas 2: To-Do List Sederhana</h2>
+        <div style="text-align: center;">
+            <input type="text" id="inputTugas" placeholder="Masukkan tugas baru...">
+            <button onclick="tambahTugas()">Tambah Tugas</button>
+            <button onclick="hapusTerakhir()">Hapus Tugas Terakhir</button>
+        </div>
+        <ul id="daftarTugas"></ul>
+    </section>
+
+    
+    <section>
+        <h2>Tugas 3: FAQ Interaktif</h2>
+        <div class="faq-item">
+            <div class="faq-pertanyaan">1. Apa itu JavaScript?</div>
+            <div class="faq-jawaban">Bahasa pemrograman tingkat tinggi yang digunakan untuk membuat halaman web interaktif, dapat dijalankan di sisi klien maupun server.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-pertanyaan">2. Apa perbedaan DOM dan jQuery?</div>
+            <div class="faq-jawaban">DOM (Document Object Model) adalah antarmuka pemrograman untuk dokumen HTML/XML yang memungkinkan akses dan manipulasi elemen. jQuery adalah library JavaScript yang menyederhanakan operasi DOM, event handling, dan animasi.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-pertanyaan">3. Bagaimana cara menambahkan event click pada elemen?</div>
+            <div class="faq-jawaban">Pada vanilla JavaScript bisa menggunakan <code>addEventListener()</code>, sedangkan pada jQuery menggunakan metode <code>.click()</code> atau <code>.on('click', function(){...})</code>.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-pertanyaan">4. Apa itu method chaining di jQuery?</div>
+            <div class="faq-jawaban">Teknik untuk menulis beberapa metode jQuery secara berurutan pada satu elemen tanpa perlu menyimpan referensi elemen tersebut ke variabel terpisah, misalnya <code>$(elemen).addClass('x').fadeIn().slideDown()</code>.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-pertanyaan">5. Apa fungsi dari metode <code>.toggle()</code> di jQuery?</div>
+            <div class="faq-jawaban">Metode ini digunakan untuk menyembunyikan atau menampilkan elemen secara bergantian. Jika elemen sedang ditampilkan, maka akan disembunyikan, dan sebaliknya.</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Tugas 4: Slideshow Gambar</h2>
+        <div id="slideshow">
+            <img src="https://i.pinimg.com/1200x/b1/21/0a/b1210ab644b6848f7583fe81bde59a04.jpg" alt="Gambar 1">
+            <img src="https://i.pinimg.com/1200x/6a/0f/0c/6a0f0c394bd34bb7eaa9c30a125e5180.jpg" alt="Gambar 2">
+            <img src="https://i.pinimg.com/736x/06/e4/4c/06e44cd94af719f453ec9fe9510db9e1.jpg" alt="Gambar 3">
+        </div>
+        <div style="text-align: center;">
+            <button id="prev">Prev</button>
+            <button id="next">Next</button>
+        </div>
+    </section>
+
+    
+    <section>
+        <h2>Tugas 5: Notifikasi dengan Animasi Chaining</h2>
+        <div style="text-align: center;">
+            <button id="tampilNotif">Tampilkan Notifikasi</button>
+        </div>
+        <div id="notifikasi">Pemberitahuan: Operasi berhasil dilakukan!</div>
+    </section>
+
+    
+    <script>
+        
+        function ubahNama() {
+            const namaBaru = prompt("Masukkan nama baru:", "");
+            if (namaBaru) document.getElementById("nama").innerHTML = namaBaru;
+        }
+
+        function ubahProdi() {
+            const prodiBaru = prompt("Masukkan program studi baru:", "");
+            if (prodiBaru) document.getElementById("prodi").innerHTML = prodiBaru;
+        }
+
+        function gantiFoto() {
+            const fotoBaru = prompt("Masukkan URL foto baru (gunakan placeholder jika tidak ada):", "https://via.placeholder.com/150");
+            if (fotoBaru) document.getElementById("foto").setAttribute("src", fotoBaru);
+        }
+
+        function sembunyikanBiodata() {
+            document.getElementById("biodata").style.display = "none";
+        }
+
+        function tampilkanBiodata() {
+            document.getElementById("biodata").style.display = "block";
+        }
+
+        
+        function tambahTugas() {
+            const input = document.getElementById("inputTugas");
+            const tugas = input.value.trim();
+            if (tugas === "") return;
+
+            const liBaru = document.createElement("li");
+            liBaru.appendChild(document.createTextNode(tugas));
+            document.getElementById("daftarTugas").appendChild(liBaru);
+            
+            input.value = "";
+        }
+
+        function hapusTerakhir() {
+            const daftar = document.getElementById("daftarTugas");
+            if (daftar.lastChild) daftar.removeChild(daftar.lastChild);
+        }
+
+        
+        $(document).ready(function() {
+            // FAQ Click Event
+            $(".faq-pertanyaan").click(function() {
+                $(this).next(".faq-jawaban").toggle();
+            });
+
+            // FAQ Hover Event
+            $(".faq-pertanyaan").hover(
+                function() { $(this).addClass("biru"); },
+                function() { $(this).removeClass("biru"); }
+            );
+
+            
+            let indeksSekarang = 0;
+            const totalGambar = $("#slideshow img").length;
+
+            function tampilkanGambar(indeks) {
+                $("#slideshow img").fadeOut(500);
+                $("#slideshow img").eq(indeks).fadeIn(500);
+            }
+
+            $("#next").click(function() {
+                indeksSekarang = (indeksSekarang + 1) % totalGambar;
+                tampilkanGambar(indeksSekarang);
+            });
+
+            $("#prev").click(function() {
+                indeksSekarang = (indeksSekarang - 1 + totalGambar) % totalGambar;
+                tampilkanGambar(indeksSekarang);
+            });
+
+            
+            $("#tampilNotif").click(function() {
+                $("#notifikasi")
+                    .addClass("warnanya")
+                    .fadeIn(500)
+                    .slideDown(500)
+                    .delay(3000)
+                    .slideUp(500)
+                    .fadeOut(500, function() {
+                        $(this).removeClass("warnanya");
+                    });
+            });
+        });
+    </script>
+</body>
+</html>                                                                                      
